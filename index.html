@@ -391,6 +391,21 @@ body::after{
 .buttons{
   margin-top: 60px;
 }
+
+.hero-visual{
+  position:relative;
+  height:430px;
+  border-radius:30px;
+  overflow:hidden;
+  border:1px solid rgba(124,255,58,.25);
+}
+
+.hero-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
 </style>
 </head>
 
@@ -409,7 +424,9 @@ body::after{
     </div>
   </div>
 
-  <div class="hero-visual"></div>
+<div class="hero-visual">
+  <img src="Pod.jpg" alt="Lucky Puff">
+</div>
 </section>
 
 <section class="section" id="produk">
@@ -454,7 +471,7 @@ const products = [
     price:"Rp180.000",
     detail:"Warna: Black | Type: Rechargeable",
     stock:8,
-    image:"images/pod-device-black.png"
+    image:"Vape.png"
   },
   {
     category:"Device",
@@ -462,7 +479,7 @@ const products = [
     price:"Rp150.000",
     detail:"Warna: Silver | Compact design",
     stock:4,
-    image:"images/mini-pod-silver.png"
+    image:"Vape.png"
   },
   {
     category:"Liquid",
@@ -470,7 +487,7 @@ const products = [
     price:"Rp95.000",
     detail:"Rasa: Mango Ice | Nicotine: 3mg",
     stock:12,
-    image:"images/mango-ice-liquid.png"
+    image:"Vape.png"
   },
   {
     category:"Liquid",
@@ -478,7 +495,7 @@ const products = [
     price:"Rp95.000",
     detail:"Rasa: Grape Mint | Nicotine: 3mg",
     stock:0,
-    image:"images/grape-mint-liquid.png"
+    image:"Vape.png"
   },
   {
     category:"Cartridge",
@@ -486,7 +503,7 @@ const products = [
     price:"Rp45.000",
     detail:"Isi: 1 pcs | Compatible pod device",
     stock:10,
-    image:"images/replacement-cartridge.png"
+    image:"Vape.png"
   }
 ];
 

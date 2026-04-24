@@ -1,599 +1,586 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lucky Puff</title>
-  <meta name="robots" content="noindex" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Puff</title>
+<meta name="robots" content="noindex">
 
-    body {
-      font-family: Arial, sans-serif;
-      color: #fff;
-      background:
-        radial-gradient(circle at 15% 20%, rgba(34,197,94,.35), transparent 28%),
-        radial-gradient(circle at 85% 25%, rgba(168,85,247,.35), transparent 30%),
-        radial-gradient(circle at 50% 80%, rgba(14,165,233,.22), transparent 35%),
-        linear-gradient(135deg, #020617, #050816 45%, #020617);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial,sans-serif;
+  background:#020617;
+  color:white;
+}
+html{scroll-behavior:smooth}
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        url("https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-      opacity: .08;
-      z-index: -3;
-    }
+.hero{
+  min-height:720px;
+  background:
+    linear-gradient(rgba(2,6,23,.35),rgba(2,6,23,.9)),
+    url("https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  position:relative;
+  overflow:hidden;
+}
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 60%, rgba(34,197,94,.22), transparent 25%),
-        radial-gradient(circle at 80% 65%, rgba(168,85,247,.28), transparent 28%),
-        linear-gradient(rgba(2,6,23,.72), rgba(2,6,23,.92));
-      z-index: -2;
-      pointer-events: none;
-    }
+.hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 50%,rgba(168,85,247,.5),transparent 30%),
+    radial-gradient(circle at 80% 50%,rgba(34,197,94,.45),transparent 32%);
+  pointer-events:none;
+}
 
-    .nav {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.nav{
+  position:relative;
+  z-index:2;
+  max-width:1200px;
+  margin:auto;
+  padding:24px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+.logo span{color:#7cff3a}
+.nav-links a{
+  color:white;
+  text-decoration:none;
+  margin-left:26px;
+  font-size:14px;
+  font-weight:bold;
+}
+.nav-links .order{
+  background:#7cff3a;
+  color:#061106;
+  padding:12px 20px;
+  border-radius:999px;
+}
 
-    .brand {
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:1000px;
+  margin:auto;
+  text-align:center;
+  padding:100px 20px 30px;
+}
+.hero-content .mini{
+  color:#7cff3a;
+  font-weight:bold;
+  margin-bottom:18px;
+}
+.hero h1{
+  font-size:clamp(44px,7vw,86px);
+  line-height:1;
+  text-transform:uppercase;
+  text-shadow:0 0 30px rgba(124,255,58,.35);
+}
+.hero h1 span{
+  display:block;
+  color:#7cff3a;
+}
+.hero p{
+  margin:24px auto;
+  max-width:650px;
+  color:#e5e7eb;
+  line-height:1.8;
+  font-size:18px;
+}
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.btn{
+  padding:15px 26px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:900;
+  border:1px solid #7cff3a;
+}
+.btn.primary{
+  background:#7cff3a;
+  color:#061106;
+}
+.btn.secondary{
+  color:#7cff3a;
+  background:rgba(0,0,0,.35);
+}
 
-    .brand span { color: #7cff3a; }
+.features{
+  position:relative;
+  z-index:3;
+  max-width:1050px;
+  margin:-45px auto 40px;
+  background:rgba(2,6,23,.82);
+  border:1px solid rgba(124,255,58,.25);
+  border-radius:18px;
+  padding:22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+.feature h3{color:#7cff3a;margin-bottom:7px}
+.feature p{color:#cbd5e1;font-size:14px;line-height:1.6}
 
-    .nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      margin-left: 22px;
-      font-weight: bold;
-    }
+.notice{
+  max-width:1050px;
+  margin:0 auto 25px;
+  padding:14px 18px;
+  border-radius:14px;
+  background:rgba(250,204,21,.1);
+  border:1px solid rgba(250,204,21,.3);
+  color:#fde68a;
+  font-size:14px;
+}
 
-    .nav .order {
-      background: #7cff3a;
-      color: #061106;
-      padding: 12px 18px;
-      border-radius: 999px;
-    }
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+.section-title{
+  text-align:center;
+  font-size:38px;
+  margin-bottom:8px;
+}
+.section-title span{color:#7cff3a}
+.section-sub{
+  text-align:center;
+  color:#cbd5e1;
+  margin-bottom:28px;
+}
 
-    .hero {
-      max-width: 1200px;
-      margin: auto;
-      min-height: 560px;
-      padding: 60px 20px 30px;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 30px;
-      align-items: center;
-    }
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.filter-btn{
+  border:1px solid rgba(124,255,58,.35);
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:11px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:#7cff3a;
+  color:#061106;
+}
+.search input{
+  width:280px;
+  max-width:100%;
+  padding:13px 15px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#0f172a;
+  color:white;
+  outline:none;
+}
 
-    .hero-text .mini {
-      color: #7cff3a;
-      font-weight: bold;
-      margin-bottom: 14px;
-    }
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:22px;
+}
+.card{
+  background:#0f172a;
+  border:1px solid rgba(124,255,58,.28);
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 18px 35px rgba(0,0,0,.35);
+}
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 35px rgba(124,255,58,.18);
+}
+.card img{
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  background:#020617;
+}
+.card-content{
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.tag{
+  width:fit-content;
+  background:rgba(124,255,58,.13);
+  color:#7cff3a;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  margin-bottom:12px;
+}
+.product-name{
+  font-size:20px;
+  min-height:52px;
+  margin-bottom:10px;
+}
+.price{
+  color:#7cff3a;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+.info{
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.status{
+  width:fit-content;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:16px;
+}
+.ready{
+  color:#7cff3a;
+  border:1px solid rgba(124,255,58,.35);
+}
+.soldout{
+  color:#f87171;
+  border:1px solid rgba(248,113,113,.35);
+}
+.telegram-btn{
+  margin-top:auto;
+  text-align:center;
+  text-decoration:none;
+  background:#7cff3a;
+  color:#061106;
+  padding:13px;
+  border-radius:14px;
+  font-weight:900;
+}
 
-    .hero h1 {
-      font-size: clamp(42px, 7vw, 82px);
-      line-height: .95;
-      text-transform: uppercase;
-      text-shadow: 0 0 25px rgba(124,255,58,.25);
-    }
+.banner{
+  margin-top:45px;
+  border-radius:24px;
+  min-height:230px;
+  background:
+    linear-gradient(90deg,rgba(2,6,23,.92),rgba(2,6,23,.45),rgba(2,6,23,.92)),
+    url("https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+  border:1px solid rgba(124,255,58,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+}
+.banner h2{
+  font-size:38px;
+  margin-bottom:10px;
+}
+.banner span{color:#7cff3a}
 
-    .hero h1 span {
-      color: #7cff3a;
-      display: block;
-    }
+.about,.testimoni,.contact{
+  max-width:1100px;
+  margin:auto;
+  padding:45px 20px;
+}
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.box{
+  background:#0f172a;
+  border:1px solid rgba(124,255,58,.18);
+  border-radius:18px;
+  padding:22px;
+}
+.box h3{color:#7cff3a;margin-bottom:10px}
+.box p{color:#cbd5e1;line-height:1.7}
 
-    .hero p {
-      color: #dbeafe;
-      max-width: 560px;
-      margin: 24px 0;
-      line-height: 1.7;
-      font-size: 17px;
-    }
+.footer{
+  text-align:center;
+  color:#94a3b8;
+  padding:32px 20px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
 
-    .buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 15px 24px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 900;
-      border: 1px solid #7cff3a;
-    }
-
-    .btn.primary {
-      background: #7cff3a;
-      color: #071207;
-      box-shadow: 0 0 25px rgba(124,255,58,.35);
-    }
-
-    .btn.secondary {
-      color: #7cff3a;
-      background: rgba(2,6,23,.45);
-    }
-
-    .hero-visual {
-      position: relative;
-      height: 430px;
-      border-radius: 30px;
-      overflow: hidden;
-      border: 1px solid rgba(124,255,58,.25);
-      background:
-        radial-gradient(circle at 50% 50%, rgba(124,255,58,.25), transparent 35%),
-        url("https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80") center/cover no-repeat;
-      box-shadow: 0 0 60px rgba(124,255,58,.15);
-    }
-
-    .hero-visual::after {
-      content: "LUCKY PUFF";
-      position: absolute;
-      bottom: 25px;
-      left: 25px;
-      font-size: 28px;
-      font-weight: 900;
-      color: #fff;
-      text-shadow: 0 0 20px #000;
-    }
-
-    .notice {
-      max-width: 1160px;
-      margin: 0 auto 30px;
-      padding: 16px 20px;
-      background: rgba(250,204,21,.1);
-      border: 1px solid rgba(250,204,21,.3);
-      color: #fde68a;
-      border-radius: 18px;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 35px 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
-
-    .section-title span { color: #7cff3a; }
-
-    .section-sub {
-      text-align: center;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .filters {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      padding: 11px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(124,255,58,.3);
-      background: rgba(15,23,42,.75);
-      color: #e5e7eb;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: #7cff3a;
-      color: #071207;
-    }
-
-    .search input {
-      padding: 13px 15px;
-      width: 280px;
-      max-width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(15,23,42,.85);
-      color: white;
-      outline: none;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-      gap: 22px;
-    }
-
-    .card {
-      background: rgba(15,23,42,.78);
-      border: 1px solid rgba(124,255,58,.22);
-      border-radius: 22px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
-      backdrop-filter: blur(12px);
-      transition: .2s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 35px rgba(124,255,58,.18);
-    }
-
-    .card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      background: #020617;
-    }
-
-    .card-content {
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .tag {
-      width: fit-content;
-      background: rgba(124,255,58,.13);
-      color: #7cff3a;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-
-    .product-name {
-      font-size: 20px;
-      min-height: 52px;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-
-    .price {
-      color: #7cff3a;
-      font-weight: 900;
-      font-size: 19px;
-      margin-bottom: 10px;
-    }
-
-    .info {
-      color: #cbd5e1;
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .status {
-      width: fit-content;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .ready {
-      color: #7cff3a;
-      border: 1px solid rgba(124,255,58,.35);
-      background: rgba(124,255,58,.12);
-    }
-
-    .soldout {
-      color: #f87171;
-      border: 1px solid rgba(248,113,113,.35);
-      background: rgba(248,113,113,.12);
-    }
-
-    .telegram-btn {
-      margin-top: auto;
-      text-align: center;
-      text-decoration: none;
-      background: #7cff3a;
-      color: #061106;
-      padding: 13px;
-      border-radius: 14px;
-      font-weight: 900;
-    }
-
-    .banner {
-      margin-top: 45px;
-      border-radius: 24px;
-      min-height: 220px;
-      background:
-        linear-gradient(90deg, rgba(2,6,23,.92), rgba(2,6,23,.35), rgba(2,6,23,.92)),
-        url("https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
-      border: 1px solid rgba(124,255,58,.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-    }
-
-    .banner h2 {
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
-
-    .banner span { color: #7cff3a; }
-
-    .features {
-      max-width: 1200px;
-      margin: auto;
-      padding: 35px 20px 60px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .feature {
-      background: rgba(15,23,42,.65);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .feature h3 {
-      color: #7cff3a;
-      margin-bottom: 8px;
-    }
-
-    .feature p {
-      color: #cbd5e1;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .footer {
-      text-align: center;
-      color: #94a3b8;
-      padding: 30px 20px;
-      border-top: 1px solid rgba(255,255,255,.08);
-    }
-
-    @media (max-width: 800px) {
-      .nav { flex-direction: column; gap: 16px; }
-      .nav a { margin: 0 8px; }
-      .hero { grid-template-columns: 1fr; padding-top: 30px; }
-      .hero-visual { height: 330px; }
-      .topbar { flex-direction: column; }
-      .search input { width: 100%; }
-    }
-  </style>
+@media(max-width:700px){
+  .nav{flex-direction:column;gap:14px}
+  .nav-links a{margin:0 8px}
+  .search input{width:100%}
+  .topbar{flex-direction:column}
+}
+</style>
 </head>
 
 <body>
 
+<section class="hero" id="home">
   <nav class="nav">
-    <div class="brand">LUCKY <span>PUFF</span></div>
-    <div>
+    <div class="logo">LUCKY <span>PUFF</span></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
       <a href="#produk">Produk</a>
-      <a href="#order" class="order">Order Now</a>
+      <a href="#about">Tentang</a>
+      <a href="#kontak" class="order">Order Now</a>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-text">
-      <div class="mini">VAPE STORE • 100% ORIGINAL</div>
-      <h1>FEEL THE FLAVOR <span>LIVE THE CLOUD</span></h1>
-      <p>Lucky Puff menghadirkan pilihan device, liquid, dan cartridge dengan tampilan modern, vibe positif, dan pengalaman vaping yang smooth.</p>
-      <div class="buttons">
-        <a href="#produk" class="btn primary">Lihat Produk</a>
-        <a href="https://t.me/usernamekamu" target="_blank" class="btn secondary">Hubungi Kami</a>
-      </div>
+  <div class="hero-content">
+    <div class="mini">VAPE STORE • 100% ORIGINAL</div>
+    <h1>FEEL THE FLAVOR <span>LIVE THE CLOUD</span></h1>
+    <p>Lucky Puff menghadirkan pilihan device, liquid, dan cartridge dengan tampilan modern, vibe positif, dan pengalaman vaping yang smooth.</p>
+    <div class="buttons">
+      <a href="#produk" class="btn primary">Lihat Produk</a>
+      <a href="#kontak" class="btn secondary">Hubungi Kami</a>
     </div>
+  </div>
+</section>
 
-    <div class="hero-visual"></div>
-  </section>
+<div class="features">
+  <div class="feature">
+    <h3>100% Original</h3>
+    <p>Produk asli dan detail produk jelas untuk customer.</p>
+  </div>
+  <div class="feature">
+    <h3>Order Cepat</h3>
+    <p>Customer tinggal klik tombol order langsung ke Telegram.</p>
+  </div>
+  <div class="feature">
+    <h3>Ready Stock</h3>
+    <p>Status produk bisa kamu update sendiri dari GitHub.</p>
+  </div>
+</div>
 
-  <div class="notice">
-    Khusus 18+ / dewasa. Produk ini hanya untuk pengguna yang sudah memenuhi usia legal. Please purchase responsibly.
+<div class="notice">
+  Khusus 18+ / dewasa. Produk ini hanya untuk pengguna yang sudah memenuhi usia legal. Please purchase responsibly.
+</div>
+
+<section class="section" id="produk">
+  <h2 class="section-title">Produk <span>Terlaris</span></h2>
+  <p class="section-sub">Berbagai pilihan vape terbaik dengan tampilan modern.</p>
+
+  <div class="topbar">
+    <div class="filters" id="categoryFilter"></div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Cari device, liquid, rasa...">
+    </div>
   </div>
 
-  <section class="section" id="produk">
-    <h2 class="section-title">Produk <span>Terlaris</span></h2>
-    <p class="section-sub">Pilih produk favorit kamu, lalu order langsung via Telegram.</p>
+  <div class="products" id="productList"></div>
 
-    <div class="topbar">
-      <div class="filters" id="categoryFilter"></div>
-      <div class="search">
-        <input type="text" id="searchInput" placeholder="Cari device, liquid, rasa..." />
+  <div class="banner">
+    <div>
+      <h2>READY TO <span>VAPE?</span></h2>
+      <p style="color:#cbd5e1;margin-bottom:20px;">Dapatkan pengalaman vape terbaik sekarang juga.</p>
+      <a href="#kontak" class="btn primary">Order via Telegram</a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <h2 class="section-title">Tentang <span>Kami</span></h2>
+  <div class="grid-3">
+    <div class="box">
+      <h3>Original Product</h3>
+      <p>Kami menyediakan pilihan vape, liquid, dan aksesoris dengan informasi produk yang jelas.</p>
+    </div>
+    <div class="box">
+      <h3>Fast Response</h3>
+      <p>Order dan pertanyaan customer langsung diarahkan ke Telegram agar lebih cepat.</p>
+    </div>
+    <div class="box">
+      <h3>Clean Display</h3>
+      <p>Tampilan produk dibuat rapi agar customer mudah memilih produk yang diinginkan.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimoni">
+  <h2 class="section-title">Kenapa <span>Lucky Puff?</span></h2>
+  <div class="grid-3">
+    <div class="box">
+      <h3>Rasa Lengkap</h3>
+      <p>Pilihan rasa dan kategori produk dibuat mudah dicari.</p>
+    </div>
+    <div class="box">
+      <h3>Desain Modern</h3>
+      <p>Website menggunakan tema neon smoke agar cocok dengan konsep vape store.</p>
+    </div>
+    <div class="box">
+      <h3>Order Simple</h3>
+      <p>Tidak ribet checkout, langsung chat admin via Telegram.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="kontak">
+  <h2 class="section-title">Order <span>Sekarang</span></h2>
+  <div class="box" style="text-align:center;">
+    <p style="margin-bottom:20px;">Klik tombol di bawah untuk order atau tanya produk ready stock.</p>
+    <a href="https://t.me/usernamekamu" target="_blank" class="btn primary">Chat Telegram</a>
+  </div>
+</section>
+
+<footer class="footer">
+  © 2026 Lucky Puff — 18+ Only
+</footer>
+
+<script>
+const telegramUsername = "usernamekamu";
+
+const products = [
+  {
+    category: "Device",
+    name: "Lost Mary BM600",
+    price: "Rp135.000",
+    detail: "Warna: Purple | Tipe: Disposable",
+    stock: 8,
+    image: "https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Device",
+    name: "Elfbar BC5000",
+    price: "Rp150.000",
+    detail: "Warna: Green | Tipe: Rechargeable",
+    stock: 6,
+    image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Device",
+    name: "Vaporesso XROS 3 Mini",
+    price: "Rp280.000",
+    detail: "Warna: Purple | Tipe: Pod System",
+    stock: 4,
+    image: "https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Device",
+    name: "Voopoo Drag X",
+    price: "Rp650.000",
+    detail: "Warna: Brown | Tipe: Mod Kit",
+    stock: 2,
+    image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Liquid",
+    name: "Mango Ice Liquid",
+    price: "Rp95.000",
+    detail: "Rasa: Mango Ice | Nicotine: 3mg",
+    stock: 12,
+    image: "https://images.unsplash.com/photo-1580913428023-02c695666d61?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Liquid",
+    name: "Grape Mint Liquid",
+    price: "Rp95.000",
+    detail: "Rasa: Grape Mint | Nicotine: 3mg",
+    stock: 0,
+    image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=900&q=80"
+  },
+  {
+    category: "Cartridge",
+    name: "Replacement Cartridge",
+    price: "Rp45.000",
+    detail: "Isi: 1 pcs | Compatible Pod Device",
+    stock: 10,
+    image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=900&q=80"
+  }
+];
+
+let activeCategory = "Semua";
+
+const productList = document.getElementById("productList");
+const categoryFilter = document.getElementById("categoryFilter");
+const searchInput = document.getElementById("searchInput");
+
+function telegramLink(product){
+  const text =
+    `Halo kak, saya mau order:%0A%0A` +
+    `Produk: ${product.name}%0A` +
+    `Kategori: ${product.category}%0A` +
+    `Harga: ${product.price}%0A` +
+    `Detail: ${product.detail}`;
+
+  return `https://t.me/${telegramUsername}?text=${text}`;
+}
+
+function renderCategories(){
+  const categories = ["Semua", ...new Set(products.map(p => p.category))];
+
+  categoryFilter.innerHTML = categories.map(category => `
+    <button class="filter-btn ${category === activeCategory ? "active" : ""}" onclick="setCategory('${category}')">
+      ${category}
+    </button>
+  `).join("");
+}
+
+function renderProducts(){
+  const keyword = searchInput.value.toLowerCase();
+
+  const filtered = products.filter(product => {
+    const matchCategory = activeCategory === "Semua" || product.category === activeCategory;
+    const text = `${product.category} ${product.name} ${product.price} ${product.detail}`.toLowerCase();
+    return matchCategory && text.includes(keyword);
+  });
+
+  if(filtered.length === 0){
+    productList.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#cbd5e1;">Produk tidak ditemukan.</div>`;
+    return;
+  }
+
+  productList.innerHTML = filtered.map(product => `
+    <div class="card">
+      <img src="${product.image}" alt="${product.name}">
+      <div class="card-content">
+        <span class="tag">${product.category}</span>
+        <h3 class="product-name">${product.name}</h3>
+        <div class="price">${product.price}</div>
+        <div class="info">${product.detail}</div>
+
+        <span class="status ${product.stock === 0 ? "soldout" : "ready"}">
+          ${product.stock === 0 ? "Sold Out" : "Ready"}
+        </span>
+
+        <a class="telegram-btn" href="${telegramLink(product)}" target="_blank">
+          ${product.stock === 0 ? "Tanya via Telegram" : "Order via Telegram"}
+        </a>
       </div>
     </div>
+  `).join("");
+}
 
-    <div class="products" id="productList"></div>
+function setCategory(category){
+  activeCategory = category;
+  renderCategories();
+  renderProducts();
+}
 
-    <div class="banner" id="order">
-      <div>
-        <h2>READY TO <span>VAPE?</span></h2>
-        <p style="color:#cbd5e1; margin-bottom:20px;">Order sekarang dan tanyakan produk ready stock via Telegram.</p>
-        <a href="https://t.me/usernamekamu" target="_blank" class="btn primary">Order Now</a>
-      </div>
-    </div>
-  </section>
+searchInput.addEventListener("input", renderProducts);
 
-  <section class="features">
-    <div class="feature">
-      <h3>100% Original</h3>
-      <p>Produk original dan detail produk ditampilkan jelas untuk customer.</p>
-    </div>
-    <div class="feature">
-      <h3>Order Cepat</h3>
-      <p>Customer tinggal klik tombol order dan langsung masuk ke Telegram.</p>
-    </div>
-    <div class="feature">
-      <h3>Update Manual</h3>
-      <p>Produk, harga, stok, dan gambar bisa kamu edit sendiri dari GitHub.</p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    © 2026 Lucky Puff — 18+ Only
-  </footer>
-
-  <script>
-    const telegramUsername = "usernamekamu";
-
-    const products = [
-      {
-        category: "Device",
-        name: "Pod Device Black",
-        price: "Rp180.000",
-        detail: "Warna: Black | Type: Rechargeable",
-        stock: 8,
-        image: "https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        category: "Device",
-        name: "Mini Pod Silver",
-        price: "Rp150.000",
-        detail: "Warna: Silver | Compact design",
-        stock: 4,
-        image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        category: "Liquid",
-        name: "Mango Ice Liquid",
-        price: "Rp95.000",
-        detail: "Rasa: Mango Ice | Nicotine: 3mg",
-        stock: 12,
-        image: "https://images.unsplash.com/photo-1580913428023-02c695666d61?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        category: "Liquid",
-        name: "Grape Mint Liquid",
-        price: "Rp95.000",
-        detail: "Rasa: Grape Mint | Nicotine: 3mg",
-        stock: 0,
-        image: "https://images.unsplash.com/photo-1615397349754-cfa2066a298e?auto=format&fit=crop&w=900&q=80"
-      },
-      {
-        category: "Cartridge",
-        name: "Replacement Cartridge",
-        price: "Rp45.000",
-        detail: "Isi: 1 pcs | Compatible pod device",
-        stock: 10,
-        image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=900&q=80"
-      }
-    ];
-
-    let activeCategory = "Semua";
-
-    const productList = document.getElementById("productList");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const searchInput = document.getElementById("searchInput");
-
-    function telegramLink(product) {
-      const text =
-        `Halo kak, saya mau order:%0A%0A` +
-        `Produk: ${product.name}%0A` +
-        `Kategori: ${product.category}%0A` +
-        `Harga: ${product.price}%0A` +
-        `Detail: ${product.detail}`;
-
-      return `https://t.me/${telegramUsername}?text=${text}`;
-    }
-
-    function renderCategories() {
-      const categories = ["Semua", ...new Set(products.map(p => p.category))];
-
-      categoryFilter.innerHTML = categories.map(category => `
-        <button class="filter-btn ${category === activeCategory ? "active" : ""}" onclick="setCategory('${category}')">
-          ${category}
-        </button>
-      `).join("");
-    }
-
-    function renderProducts() {
-      const keyword = searchInput.value.toLowerCase();
-
-      const filtered = products.filter(product => {
-        const matchCategory = activeCategory === "Semua" || product.category === activeCategory;
-
-        const searchableText = [
-          product.category,
-          product.name,
-          product.price,
-          product.detail
-        ].join(" ").toLowerCase();
-
-        return matchCategory && searchableText.includes(keyword);
-      });
-
-      if (filtered.length === 0) {
-        productList.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#cbd5e1;">Produk tidak ditemukan.</div>`;
-        return;
-      }
-
-      productList.innerHTML = filtered.map(product => `
-        <div class="card">
-          <img src="${product.image}" alt="${product.name}">
-          <div class="card-content">
-            <span class="tag">${product.category}</span>
-            <h3 class="product-name">${product.name}</h3>
-            <div class="price">${product.price}</div>
-            <div class="info">${product.detail}</div>
-
-            <span class="status ${product.stock === 0 ? "soldout" : "ready"}">
-              ${product.stock === 0 ? "Sold Out" : "Ready"}
-            </span>
-
-            <a class="telegram-btn" href="${telegramLink(product)}" target="_blank">
-              ${product.stock === 0 ? "Tanya via Telegram" : "Order via Telegram"}
-            </a>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function setCategory(category) {
-      activeCategory = category;
-      renderCategories();
-      renderProducts();
-    }
-
-    searchInput.addEventListener("input", renderProducts);
-
-    renderCategories();
-    renderProducts();
-  </script>
+renderCategories();
+renderProducts();
+</script>
 
 </body>
 </html>

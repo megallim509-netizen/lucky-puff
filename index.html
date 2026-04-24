@@ -5,172 +5,275 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lucky Puff</title>
   <meta name="robots" content="noindex" />
-
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: Arial, sans-serif;
       color: #fff;
-      min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(34,197,94,0.25), transparent 35%),
-        radial-gradient(circle at top right, rgba(59,130,246,0.22), transparent 35%),
-        linear-gradient(135deg, #020617, #0f172a 45%, #111827);
-      background-attachment: fixed;
+        radial-gradient(circle at 15% 20%, rgba(34,197,94,.35), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(168,85,247,.35), transparent 30%),
+        radial-gradient(circle at 50% 80%, rgba(14,165,233,.22), transparent 35%),
+        linear-gradient(135deg, #020617, #050816 45%, #020617);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background:
+        url("https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+      opacity: .08;
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 60%, rgba(34,197,94,.22), transparent 25%),
+        radial-gradient(circle at 80% 65%, rgba(168,85,247,.28), transparent 28%),
+        linear-gradient(rgba(2,6,23,.72), rgba(2,6,23,.92));
+      z-index: -2;
       pointer-events: none;
-      z-index: -1;
     }
 
-    .header {
-      text-align: center;
-      padding: 42px 20px 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(2,6,23,0.58);
-      backdrop-filter: blur(14px);
-    }
-
-    .logo {
-      font-size: 38px;
-      letter-spacing: 4px;
-      font-weight: 800;
-    }
-
-    .logo span {
-      color: #22c55e;
-    }
-
-    .tagline {
-      margin-top: 10px;
-      color: #cbd5e1;
-      font-size: 15px;
-    }
-
-    .age-note {
-      max-width: 1100px;
-      margin: 18px auto 0;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(250,204,21,0.1);
-      border: 1px solid rgba(250,204,21,0.25);
-      color: #fde68a;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .topbar {
-      max-width: 1100px;
-      margin: 0 auto;
+    .nav {
+      max-width: 1200px;
+      margin: auto;
       padding: 20px;
       display: flex;
       justify-content: space-between;
-      gap: 12px;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .brand span { color: #7cff3a; }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 22px;
+      font-weight: bold;
+    }
+
+    .nav .order {
+      background: #7cff3a;
+      color: #061106;
+      padding: 12px 18px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      min-height: 560px;
+      padding: 60px 20px 30px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-text .mini {
+      color: #7cff3a;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: .95;
+      text-transform: uppercase;
+      text-shadow: 0 0 25px rgba(124,255,58,.25);
+    }
+
+    .hero h1 span {
+      color: #7cff3a;
+      display: block;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 560px;
+      margin: 24px 0;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .search-box input {
-      width: 280px;
-      max-width: 100%;
-      padding: 13px 15px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(15,23,42,0.85);
-      color: white;
-      outline: none;
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      border: 1px solid #7cff3a;
     }
 
-    .category-filter {
+    .btn.primary {
+      background: #7cff3a;
+      color: #071207;
+      box-shadow: 0 0 25px rgba(124,255,58,.35);
+    }
+
+    .btn.secondary {
+      color: #7cff3a;
+      background: rgba(2,6,23,.45);
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 430px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(124,255,58,.25);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(124,255,58,.25), transparent 35%),
+        url("https://images.unsplash.com/photo-1585238342024-78d387f4a707?auto=format&fit=crop&w=900&q=80") center/cover no-repeat;
+      box-shadow: 0 0 60px rgba(124,255,58,.15);
+    }
+
+    .hero-visual::after {
+      content: "LUCKY PUFF";
+      position: absolute;
+      bottom: 25px;
+      left: 25px;
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 0 20px #000;
+    }
+
+    .notice {
+      max-width: 1160px;
+      margin: 0 auto 30px;
+      padding: 16px 20px;
+      background: rgba(250,204,21,.1);
+      border: 1px solid rgba(250,204,21,.3);
+      color: #fde68a;
+      border-radius: 18px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .section-title span { color: #7cff3a; }
+
+    .section-sub {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .filters {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .category-btn {
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(30,41,59,0.85);
-      color: #e5e7eb;
+    .filter-btn {
       padding: 11px 16px;
       border-radius: 999px;
+      border: 1px solid rgba(124,255,58,.3);
+      background: rgba(15,23,42,.75);
+      color: #e5e7eb;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .category-btn.active,
-    .category-btn:hover {
-      background: #22c55e;
-      color: #03120a;
       font-weight: bold;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 20px 50px;
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: #7cff3a;
+      color: #071207;
     }
 
-    .section-title {
-      font-size: 24px;
-      margin: 16px 0 20px;
+    .search input {
+      padding: 13px 15px;
+      width: 280px;
+      max-width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(15,23,42,.85);
+      color: white;
+      outline: none;
     }
 
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
       gap: 22px;
-      align-items: stretch;
     }
 
     .card {
-      background: rgba(15,23,42,0.78);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(15,23,42,.78);
+      border: 1px solid rgba(124,255,58,.22);
       border-radius: 22px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      min-height: 100%;
-      box-shadow: 0 18px 35px rgba(0,0,0,0.3);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
       backdrop-filter: blur(12px);
-      transition: 0.2s;
+      transition: .2s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 24px 45px rgba(0,0,0,0.42);
+      transform: translateY(-6px);
+      box-shadow: 0 0 35px rgba(124,255,58,.18);
     }
 
     .card img {
       width: 100%;
-      height: 245px;
+      height: 260px;
       object-fit: cover;
       background: #020617;
     }
 
     .card-content {
-      padding: 17px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
 
     .tag {
-      display: inline-block;
       width: fit-content;
-      background: rgba(34,197,94,0.15);
-      color: #86efac;
+      background: rgba(124,255,58,.13);
+      color: #7cff3a;
       padding: 6px 10px;
       border-radius: 999px;
       font-size: 12px;
@@ -179,15 +282,15 @@
 
     .product-name {
       font-size: 20px;
-      line-height: 1.3;
-      margin-bottom: 10px;
       min-height: 52px;
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
     .price {
-      color: #facc15;
-      font-weight: bold;
-      font-size: 18px;
+      color: #7cff3a;
+      font-weight: 900;
+      font-size: 19px;
       margin-bottom: 10px;
     }
 
@@ -199,7 +302,6 @@
     }
 
     .status {
-      display: inline-block;
       width: fit-content;
       padding: 6px 10px;
       border-radius: 999px;
@@ -208,98 +310,163 @@
     }
 
     .ready {
-      background: rgba(34,197,94,0.15);
-      color: #4ade80;
-      border: 1px solid rgba(34,197,94,0.3);
+      color: #7cff3a;
+      border: 1px solid rgba(124,255,58,.35);
+      background: rgba(124,255,58,.12);
     }
 
     .soldout {
-      background: rgba(248,113,113,0.14);
       color: #f87171;
-      border: 1px solid rgba(248,113,113,0.32);
+      border: 1px solid rgba(248,113,113,.35);
+      background: rgba(248,113,113,.12);
     }
 
     .telegram-btn {
       margin-top: auto;
       text-align: center;
       text-decoration: none;
-      background: #22c55e;
-      color: #03120a;
-      font-weight: bold;
-      padding: 13px 14px;
+      background: #7cff3a;
+      color: #061106;
+      padding: 13px;
       border-radius: 14px;
-      transition: 0.2s;
+      font-weight: 900;
     }
 
-    .telegram-btn:hover {
-      background: #16a34a;
-      color: white;
-    }
-
-    .empty-state {
-      grid-column: 1 / -1;
+    .banner {
+      margin-top: 45px;
+      border-radius: 24px;
+      min-height: 220px;
+      background:
+        linear-gradient(90deg, rgba(2,6,23,.92), rgba(2,6,23,.35), rgba(2,6,23,.92)),
+        url("https://images.unsplash.com/photo-1600855594291-0c68f7f6f622?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat;
+      border: 1px solid rgba(124,255,58,.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       padding: 30px;
-      border-radius: 20px;
-      background: rgba(15,23,42,0.75);
+    }
+
+    .banner h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .banner span { color: #7cff3a; }
+
+    .features {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 20px 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      background: rgba(15,23,42,.65);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .feature h3 {
+      color: #7cff3a;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
       color: #cbd5e1;
-      border: 1px solid rgba(255,255,255,0.1);
+      line-height: 1.6;
+      font-size: 14px;
     }
 
     .footer {
       text-align: center;
-      padding: 28px 20px 45px;
       color: #94a3b8;
-      font-size: 14px;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255,255,255,.08);
     }
 
-    @media (max-width: 640px) {
-      .topbar {
-        flex-direction: column;
-      }
-
-      .search-box input {
-        width: 100%;
-      }
-
-      .logo {
-        font-size: 30px;
-      }
-
-      .product-name {
-        min-height: auto;
-      }
+    @media (max-width: 800px) {
+      .nav { flex-direction: column; gap: 16px; }
+      .nav a { margin: 0 8px; }
+      .hero { grid-template-columns: 1fr; padding-top: 30px; }
+      .hero-visual { height: 330px; }
+      .topbar { flex-direction: column; }
+      .search input { width: 100%; }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="header">
-    <div class="logo">LUCKY <span>PUFF</span></div>
-    <p class="tagline">Simple. Smooth. Positive Vibes Only.</p>
-
-    <div class="age-note">
-      Khusus 18+ / dewasa. Produk ini hanya untuk pengguna yang sudah memenuhi usia legal. Please purchase responsibly.
+  <nav class="nav">
+    <div class="brand">LUCKY <span>PUFF</span></div>
+    <div>
+      <a href="#produk">Produk</a>
+      <a href="#order" class="order">Order Now</a>
     </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-text">
+      <div class="mini">VAPE STORE • 100% ORIGINAL</div>
+      <h1>FEEL THE FLAVOR <span>LIVE THE CLOUD</span></h1>
+      <p>Lucky Puff menghadirkan pilihan device, liquid, dan cartridge dengan tampilan modern, vibe positif, dan pengalaman vaping yang smooth.</p>
+      <div class="buttons">
+        <a href="#produk" class="btn primary">Lihat Produk</a>
+        <a href="https://t.me/usernamekamu" target="_blank" class="btn secondary">Hubungi Kami</a>
+      </div>
+    </div>
+
+    <div class="hero-visual"></div>
+  </section>
+
+  <div class="notice">
+    Khusus 18+ / dewasa. Produk ini hanya untuk pengguna yang sudah memenuhi usia legal. Please purchase responsibly.
   </div>
 
-  <div class="topbar">
-    <div class="category-filter" id="categoryFilter"></div>
+  <section class="section" id="produk">
+    <h2 class="section-title">Produk <span>Terlaris</span></h2>
+    <p class="section-sub">Pilih produk favorit kamu, lalu order langsung via Telegram.</p>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Cari device, liquid, rasa..." />
+    <div class="topbar">
+      <div class="filters" id="categoryFilter"></div>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Cari device, liquid, rasa..." />
+      </div>
     </div>
-  </div>
 
-  <div class="container">
-    <h2 class="section-title">Daftar Produk</h2>
     <div class="products" id="productList"></div>
-  </div>
 
-  <div class="footer">
-    © 2026 Lucky Puff — Order via Telegram
-  </div>
+    <div class="banner" id="order">
+      <div>
+        <h2>READY TO <span>VAPE?</span></h2>
+        <p style="color:#cbd5e1; margin-bottom:20px;">Order sekarang dan tanyakan produk ready stock via Telegram.</p>
+        <a href="https://t.me/usernamekamu" target="_blank" class="btn primary">Order Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>100% Original</h3>
+      <p>Produk original dan detail produk ditampilkan jelas untuk customer.</p>
+    </div>
+    <div class="feature">
+      <h3>Order Cepat</h3>
+      <p>Customer tinggal klik tombol order dan langsung masuk ke Telegram.</p>
+    </div>
+    <div class="feature">
+      <h3>Update Manual</h3>
+      <p>Produk, harga, stok, dan gambar bisa kamu edit sendiri dari GitHub.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 Lucky Puff — 18+ Only
+  </footer>
 
   <script>
     const telegramUsername = "usernamekamu";
@@ -368,7 +535,7 @@
       const categories = ["Semua", ...new Set(products.map(p => p.category))];
 
       categoryFilter.innerHTML = categories.map(category => `
-        <button class="category-btn ${category === activeCategory ? "active" : ""}" onclick="setCategory('${category}')">
+        <button class="filter-btn ${category === activeCategory ? "active" : ""}" onclick="setCategory('${category}')">
           ${category}
         </button>
       `).join("");
@@ -391,7 +558,7 @@
       });
 
       if (filtered.length === 0) {
-        productList.innerHTML = `<div class="empty-state">Produk tidak ditemukan.</div>`;
+        productList.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#cbd5e1;">Produk tidak ditemukan.</div>`;
         return;
       }
 
